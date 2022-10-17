@@ -83,9 +83,6 @@ const RepositoryItem = ({item}) => {
                     <Text>Review</Text>
                 </View>
             </View>
-
-
-
         </View>
     );
 };

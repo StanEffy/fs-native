@@ -7,20 +7,22 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         backgroundColor: theme.colors.primary,
-        width: "100%",
-        paddingBottom: Constants.statusBarHeight
+        paddingBottom: Constants.statusBarHeight,
+        display: "flex",
+        flexDirection: "row"
     },
-    text: {
-        color: theme.colors.textPrimary,
-        textTransform: "uppercase"
+    tab: {
+        padding: 10,
+        textTransform: "uppercase",
+        fontWeight: theme.fontWeights.bold
     }
     // ...
 });
 
 const AppBar = () => {
     return <View style={styles.container}>
-        <AppBarTab style={styles.text} label={"Repositories"}/>
-        <AppBarTab style={styles.text} label={"Another"}/>
+        <AppBarTab to={"/"} style={styles.text} text={"Repositories"}/>
+        <AppBarTab to={"/sign_in"} style={styles.text} text={"Sign in"}/>
     </View>;
 };
 

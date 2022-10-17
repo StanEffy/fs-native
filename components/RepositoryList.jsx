@@ -58,22 +58,24 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
     return (
-        <FlatList
-            data={repositories}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={({ item, index, separators }) => (
-                <RepositoryItem key={item.id} item={item}/>
-                // <TouchableHighlight
-                //     key={item.key}
-                //     onPress={() => this._onPress(item)}
-                //     onShowUnderlay={separators.highlight}
-                //     onHideUnderlay={separators.unhighlight}>
-                //     <View style={{ backgroundColor: 'white' }}>
-                //         <Text>{item.description}</Text>
-                //     </View>
-                // </TouchableHighlight>
-            )}
-        />
+        <>
+            <FlatList
+                data={repositories}
+                ItemSeparatorComponent={ItemSeparator}
+                renderItem={({ item, index, separators }) => (
+                    <RepositoryItem key={item.id} item={item}/>
+                    // <TouchableHighlight
+                    //     key={item.key}
+                    //     onPress={() => this._onPress(item)}
+                    //     onShowUnderlay={separators.highlight}
+                    //     onHideUnderlay={separators.unhighlight}>
+                    //     <View style={{ backgroundColor: 'white' }}>
+                    //         <Text>{item.description}</Text>
+                    //     </View>
+                    // </TouchableHighlight>
+                )}
+            />
+        </>
     );
 };
 
