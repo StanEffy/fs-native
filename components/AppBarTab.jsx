@@ -1,19 +1,26 @@
-import {Text, StyleSheet} from "react-native";
+import {Text, StyleSheet, View} from "react-native";
 import theme from "./theme";
 import {Link} from "react-router-native";
 
 const styles = StyleSheet.create({
     tab: {
-        fontSize: 20
+        padding: 10,
+    },
+    text: {
+            textTransform: "uppercase",
+            fontWeight: theme.fontWeights.bold
     }
 })
 
 const AppBarTab = ({text, to}) => {
     return (
-        <Link to={to} style={styles.tab}>
-            <Text>
-                {text}
-            </Text>
+        <Link to={to}>
+            <View style={styles.tab}>
+                <Text style={styles.text}>
+                    {text}
+                </Text>
+            </View>
+
         </Link>
     );
 };
