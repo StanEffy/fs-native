@@ -6,7 +6,13 @@ import TextInput from './TextInput';
 const styles = StyleSheet.create({
     errorText: {
         marginTop: 5,
+        color: "#d73a4a",
+        marginLeft: 10
     },
+    errorDisplayed: {
+        borderWidth: 1,
+        borderColor: "#d73a4a"
+    }
 });
 
 const FormikTextInput = ({ name, ...props }) => {
