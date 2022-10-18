@@ -1,6 +1,7 @@
 import {FlatList, View, StyleSheet} from 'react-native';
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../hooks/useRepos";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
     separator: {
@@ -8,12 +9,12 @@ const styles = StyleSheet.create({
     },
 });
 
-
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
     const { repositories } = useRepositories();
 
+    console.log(Constants.expoConfig.extra);
     // Get the nodes from the edges array
     const repositoryNodes = repositories
         ? repositories.edges.map(edge => edge.node).sort((a, b) => b.forksCount - a.forksCount)

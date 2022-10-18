@@ -7,6 +7,7 @@ export const GET_REPOSITORIES = gql`
         node {
             id
             ownerName
+            description
             name
             ratingAverage
             reviewCount
