@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import { Route, Routes, Navigate } from 'react-router-native';
 
 import RepositoryList from './RepositoryList';
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#bbbbbb",
         flexGrow: 1,
-        flexShrink: 1,
+        flexShrink: 1
     },
 });
 

@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import RepositoryList from "./components/RepositoryList";
-import AppBar from "./components/AppBar";
 import { NativeRouter } from 'react-router-native';
 import Main from "./components/Main";
+import { useFonts } from 'expo-font';
 
 export default function App() {
+    const [fontsLoaded] = useFonts({
+        'Raleway-Regular': require('./assets/fonts/Raleway-Regular.ttf'),
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
   return (
     <View style={styles.container}>
         <StatusBar style="auto" />

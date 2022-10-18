@@ -1,5 +1,6 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import theme from "./theme";
+import MyAppText from "./MyAppText";
 
 const styles = StyleSheet.create({
     card: {
@@ -59,7 +60,7 @@ const RepositoryItem = ({item}) => {
                 </View>
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.textCaption}>{fullName}</Text>
-                    <Text>{description}</Text>
+                    <MyAppText>{description}</MyAppText>
                     <View style={styles.languageContainer}>
                         <Text style={styles.languageStyle}>{language}</Text>
                     </View>
