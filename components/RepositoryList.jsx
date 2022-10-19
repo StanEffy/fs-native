@@ -13,8 +13,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
     const { repositories } = useRepositories();
-
-    console.log(Constants.expoConfig.extra);
+    
     // Get the nodes from the edges array
     const repositoryNodes = repositories
         ? repositories.edges.map(edge => edge.node).sort((a, b) => b.forksCount - a.forksCount)
