@@ -18,12 +18,7 @@ const AppBar = () => {
         <ScrollView horizontal>
             <AppBarTab to={"/"} style={styles.text} text={"Repositories"}/>
             <AppBarTab to={"/sign_in"} style={styles.text} text={"Sign in"}/>
-            <AppBarTab to={"/"} style={styles.text} text={"Repositories"}/>
-            <AppBarTab to={"/sign_in"} style={styles.text} text={"Sign in"}/>
-            <AppBarTab to={"/"} style={styles.text} text={"Repositories"}/>
-            <AppBarTab to={"/sign_in"} style={styles.text} text={"Sign in"}/>
-            <AppBarTab to={"/"} style={styles.text} text={"Repositories"}/>
-            <AppBarTab to={"/sign_in"} style={styles.text} text={"Sign in"}/>
+            
         </ScrollView>
 
     </View>;

@@ -1,9 +1,11 @@
-import {Platform, StyleSheet, View} from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import { Route, Routes, Navigate } from 'react-router-native';
 
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from "./SignIn";
+import {useQuery} from "@apollo/client";
+import {GET_USERS} from "../graphql/queries";
 
 const styles = StyleSheet.create({
     container: {
@@ -14,6 +16,8 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+    const users = useQuery(GET_USERS)
+    console.log(users)
     return (
         <View style={styles.container}>
             <AppBar />
