@@ -34,3 +34,11 @@ export const GET_USERS = gql`
   }
 }
 `
+export const GET_LOGIN = gql`
+
+query Me {
+    me {
+    id
+    username
+    }
+}`

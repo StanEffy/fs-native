@@ -70,7 +70,7 @@ const SignIn = () => {
     const onSubmit = async (values) => {
         const { username, password } = values;
         try {
-            const {authenticate} = await signIn({username: "kalle", password: "password"})
+            const {authenticate} = await signIn({username, password})
             console.log(authenticate)
 
             const storage = new authStorage();
