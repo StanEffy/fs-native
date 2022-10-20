@@ -1,6 +1,7 @@
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import theme from "../theme";
-import MyAppText from "../MyAppText/MyAppText";
+import DescriptionPart from "./DescriptionPart";
+import ProjectStatsContainer from "./ProjectStatsContainer";
 
 const styles = StyleSheet.create({
     card: {
@@ -52,38 +53,8 @@ const RepositoryItem = ({item}) => {
     }
     return (
         <View style={styles.card}>
-            <View style={styles.container}>
-                <View style={styles.image}>
-                    <Image style={styles.image} source={{
-                        uri: ownerAvatarUrl
-                    }} />
-                </View>
-                <View style={styles.descriptionContainer}>
-                    <Text style={styles.textCaption}>{fullName}</Text>
-                    <MyAppText>{description}</MyAppText>
-                    <View style={styles.languageContainer}>
-                        <Text style={styles.languageStyle}>{language}</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.container && styles.bottomContainer}>
-                <View style={styles.badge}>
-                    <Text style={styles.textCaption}>{getNumber(forksCount)}</Text>
-                    <Text>Forks</Text>
-                </View>
-                <View style={styles.badge}>
-                    <Text style={styles.textCaption}>{getNumber(stargazersCount)}</Text>
-                    <Text>Stars </Text>
-                </View>
-                <View style={styles.badge}>
-                    <Text style={styles.textCaption}>{ratingAverage}</Text>
-                    <Text>Average rating</Text>
-                </View>
-                <View style={styles.badge}>
-                    <Text style={styles.textCaption}>{reviewCount}</Text>
-                    <Text>Review</Text>
-                </View>
-            </View>
+            <DescriptionPart ownerAvatarUrl={ownerAvatarUrl} description={description} fullName={fullName} language={language}/>
+            <ProjectStatsContainer forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount}/>
         </View>
     );
 };
