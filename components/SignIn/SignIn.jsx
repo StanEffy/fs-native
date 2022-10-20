@@ -2,9 +2,9 @@ import {Text, Pressable, View, StyleSheet} from 'react-native';
 import { Formik } from 'formik';
 import FormikTextInput from "./FormikTextInput";
 import * as yup from 'yup';
-import theme from "./theme";
-import useSignIn from "../hooks/useSignIn";
-import authStorage from "../utils/authStorage";
+import theme from "../theme";
+import useSignIn from "../../hooks/useSignIn";
+import authStorage from "../../utils/authStorage";
 
 const styles = StyleSheet.create({
     field: {
@@ -71,13 +71,10 @@ const SignIn = () => {
         const { username, password } = values;
         try {
             const {authenticate} = await signIn({username, password})
-            console.log(authenticate)
 
             const storage = new authStorage();
             await storage.setAccessToken(authenticate.accessToken);
 
-            const checkIfSet = await storage.getAccessToken();
-            console.log(checkIfSet)
         } catch (e) {
             console.log(e)
         }
