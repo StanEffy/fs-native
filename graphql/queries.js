@@ -1,22 +1,22 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_REPOSITORIES = gql`
-  query repositories{
+  query repositories {
     repositories {
       edges {
         node {
-            id
-            ownerName
-            description
-            name
-            ratingAverage
-            reviewCount
-            stargazersCount
-            forksCount
-            url
-            ownerAvatarUrl
-            language
-            fullName
+          id
+          ownerName
+          description
+          name
+          ratingAverage
+          reviewCount
+          stargazersCount
+          forksCount
+          url
+          ownerAvatarUrl
+          language
+          fullName
         }
       }
     }
@@ -24,31 +24,32 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_USERS = gql`
-    query {
-        users {
-            edges {
-                node {
-        username
+  query {
+    users {
+      edges {
+        node {
+          username
+        }
       }
     }
   }
-}
-`
+`;
 
 export const GET_REPO = gql`
-    query {
+  query {
     repository(id: "jaredpalmer.formik") {
-    id
-    fullName
-    url
-  }
-}
-`
-export const GET_LOGIN = gql`
-
-query Me {
-    me {
-    id
-    username
+      id
+      fullName
+      url
     }
-}`
+  }
+`;
+
+export const GET_LOGIN = gql`
+  query Me {
+    me {
+      id
+      username
+    }
+  }
+`;
