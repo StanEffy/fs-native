@@ -34,6 +34,16 @@ export const GET_USERS = gql`
   }
 }
 `
+
+export const GET_REPO = gql`
+    query {
+    repository(id: "jaredpalmer.formik") {
+    id
+    fullName
+    url
+  }
+}
+`
 export const GET_LOGIN = gql`
 
 query Me {
