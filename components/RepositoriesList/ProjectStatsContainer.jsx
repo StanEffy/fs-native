@@ -18,10 +18,10 @@ const ProjectStatsContainer = ({forksCount, stargazersCount, ratingAverage, revi
 
     return (
         <View style={styles.container && styles.bottomContainer}>
-            <StatsBlock label={"Forks"} value={forksCount}/>
-            <StatsBlock label={"Stars"} value={stargazersCount}/>
-            <StatsBlock label={"Average rating"} value={ratingAverage}/>
-            <StatsBlock label={"Reviews"} value={reviewCount}/>
+            <StatsBlock label={"Forks"} value={forksCount} testId={"forksCount"}/>
+            <StatsBlock label={"Stars"} value={stargazersCount} testId={"stargazersCount"}/>
+            <StatsBlock label={"Average rating"} value={ratingAverage} testId={"ratingAverage"}/>
+            <StatsBlock label={"Reviews"} value={reviewCount} testId={"reviewCount"}/>
         </View>
     );
 };

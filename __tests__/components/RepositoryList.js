@@ -1,3 +1,10 @@
+import React from 'react';
+import RepositoryList from "../../components/RepositoriesList/RepositoryList";
+import { render, within } from '@testing-library/react-native';
+import {getNumber} from "../../components/RepositoriesList/StatsBlock";
+import '@testing-library/jest-native/extend-expect';
+
+
 describe('RepositoryList', () => {
     describe('RepositoryListContainer', () => {
         it('renders repository information correctly', () => {
@@ -44,7 +51,39 @@ describe('RepositoryList', () => {
                 ],
             };
 
+            // eslint-disable-next-line no-unused-vars
+            const { debug, getAllByTestId } = render(<RepositoryList repositories={repositories}/>);
 
+            const arrayTransformed = repositories.edges.map(e => e.node)
+            const [first, second] = arrayTransformed;
+
+            const repositoryItems = getAllByTestId('repositoryItem');
+
+            expect(repositoryItems).toHaveLength(2)
+
+            const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
+
+
+            expect(firstRepositoryItem).toHaveTextContent(first.fullName);
+            expect(secondRepositoryItem).toHaveTextContent(second.fullName);
+
+            expect(firstRepositoryItem).toHaveTextContent(first.description);
+            expect(secondRepositoryItem).toHaveTextContent(second.description);
+
+            expect(firstRepositoryItem).toHaveTextContent(first.language);
+            expect(secondRepositoryItem).toHaveTextContent(second.language);
+
+            expect(firstRepositoryItem).toHaveTextContent(`${getNumber(first.stargazersCount)}`);
+            expect(secondRepositoryItem).toHaveTextContent(`${getNumber(second.stargazersCount)}`);
+
+            expect(firstRepositoryItem).toHaveTextContent(`${getNumber(first.forksCount)}`);
+            expect(secondRepositoryItem).toHaveTextContent(`${getNumber(second.forksCount)}`);
+
+            expect(firstRepositoryItem).toHaveTextContent(`${getNumber(first.ratingAverage)}`);
+            expect(secondRepositoryItem).toHaveTextContent(`${getNumber(second.ratingAverage)}`);
+
+            expect(firstRepositoryItem).toHaveTextContent(`${getNumber(first.reviewCount)}`);
+            expect(secondRepositoryItem).toHaveTextContent(`${getNumber(second.reviewCount)}`);
         });
     });
 });

@@ -1,6 +1,5 @@
 import {FlatList, View, StyleSheet} from 'react-native';
 import RepositoryItem from "./RepositoryItem";
-import useRepositories from "../../hooks/useRepos";
 
 const styles = StyleSheet.create({
     separator: {
@@ -10,12 +9,11 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = () => {
-    const { repositories } = useRepositories();
+const RepositoryList = ({repositories}) => {
 
     // Get the nodes from the edges array
     const repositoryNodes = repositories
-        ? repositories.edges.map(edge => edge.node).sort((a, b) => b.forksCount - a.forksCount)
+        ? repositories?.edges?.map(edge => edge.node).sort((a, b) => b.forksCount - a.forksCount)
         : [];
 
     return (

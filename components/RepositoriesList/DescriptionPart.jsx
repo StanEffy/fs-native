@@ -39,10 +39,10 @@ const DescriptionPart = ({ownerAvatarUrl, fullName, description, language}) => {
                 }} />
             </View>
             <View style={styles.descriptionContainer}>
-                <Text style={styles.textCaption}>{fullName}</Text>
-                <MyAppText>{description}</MyAppText>
+                <Text style={styles.textCaption} testID={'fullName'}>{fullName}</Text>
+                <MyAppText testId={'description'}>{description}</MyAppText>
                 <View style={styles.languageContainer}>
-                    <Text style={styles.languageStyle}>{language}</Text>
+                    <Text style={styles.languageStyle} testID={"language"}>{language}</Text>
                 </View>
             </View>
         </View>

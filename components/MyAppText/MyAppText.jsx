@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
 
 })
 
-const MyAppText = ({children, style}) => {
+const MyAppText = ({children, style, testId}) => {
     const styleProp = [style, styles.text]
     return (
-        <Text style={styleProp}>
+        <Text style={styleProp} testID={testId}>
             {children}
         </Text>
     );

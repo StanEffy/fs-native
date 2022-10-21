@@ -47,12 +47,9 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({item}) => {
     const {fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl} = item
-    const getNumber = (num) => {
-        const thousands = (num / 1000).toFixed(1)
-        return thousands + "k"
-    }
+
     return (
-        <View style={styles.card}>
+        <View style={styles.card} testID="repositoryItem">
             <DescriptionPart ownerAvatarUrl={ownerAvatarUrl} description={description} fullName={fullName} language={language}/>
             <ProjectStatsContainer forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount}/>
         </View>

@@ -10,16 +10,16 @@ const styles = StyleSheet.create({
         alignItems: "center"
     }
 })
-const StatsBlock = ({label, value}) => {
+export const getNumber = (num) => {
+    const thousands = (num / 1000).toFixed(1)
+    return num > 1000 ? thousands + "k" : num
+}
 
-    const getNumber = (num) => {
-        const thousands = (num / 1000).toFixed(1)
-        return thousands + "k"
-    }
+const StatsBlock = ({label, value, testId}) => {
 
     return (
         <View style={styles.badge}>
-            <Text style={styles.textCaption}>{value > 1000 ? getNumber(value) : value}</Text>
+            <Text style={styles.textCaption} testID={testId}>{getNumber(value)}</Text>
             <Text>{label}</Text>
         </View>
     );
