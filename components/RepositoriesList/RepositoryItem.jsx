@@ -1,7 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button, Linking } from "react-native";
 import theme from "../theme";
 import DescriptionPart from "./DescriptionPart";
 import ProjectStatsContainer from "./ProjectStatsContainer";
+import { useParams } from "react-router-native";
+import { useQuery } from "@apollo/client";
+import { GET_REPO } from "../../graphql/queries";
+import { useEffect, useState } from "react";
 
 const styles = StyleSheet.create({
   card: {
@@ -45,7 +49,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, isSingle = false }) => {
+  const { id } = useParams();
+  const [singleItem, setSingleItem] = useState(null);
+
+  const { loading } = useQuery(GET_REPO, {
+    variables: { repositoryId: id },
+    onCompleted: (data) => setSingleItem(data.repository),
+  });
+
+  if (loading) return <Text>Loading...</Text>;
+
+  console.log("single item is " + singleItem);
+
+  const handleLinkPressed = (url) => {
+    Linking.openURL(url);
+  };
+  if (!item && !singleItem) return <Text>No such item</Text>;
   const {
     fullName,
     description,
@@ -55,7 +75,8 @@ const RepositoryItem = ({ item }) => {
     ratingAverage,
     reviewCount,
     ownerAvatarUrl,
-  } = item;
+    url,
+  } = item ? item : singleItem;
 
   return (
     <View style={styles.card} testID="repositoryItem">
@@ -71,6 +92,12 @@ const RepositoryItem = ({ item }) => {
         ratingAverage={ratingAverage}
         reviewCount={reviewCount}
       />
+      {isSingle ? (
+        <Button
+          title={"Open in GitHub"}
+          onPress={() => handleLinkPressed(url)}
+        />
+      ) : null}
     </View>
   );
 };
