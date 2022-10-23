@@ -6,6 +6,7 @@ import AppBar from "./AppBar/AppBar";
 import SignIn from "./SignIn/SignIn";
 import useRepositories from "../hooks/useRepos";
 import RepositoryItem from "./RepositoriesList/RepositoryItem";
+import Review from "./ReviewForm/ReviewForm";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +28,7 @@ const Main = () => {
           exact
         />
         <Route path="/sign_in" element={<SignIn />} exact />
+        <Route path="/review" element={<Review />} exact />
         <Route path="/:id" element={<RepositoryItem isSingle={true} />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -2,7 +2,7 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import theme from "../theme";
 import AppBarTab from "./AppBarTab";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AuthStorageContext from "../../contexts/AuthStorageContext";
 import { useApolloClient, useQuery } from "@apollo/client";
 import { GET_LOGIN } from "../../graphql/queries";
@@ -39,12 +39,19 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarTab to={"/"} style={styles.text} text={"Repositories"} />
         {isSignedIn ? (
-          <AppBarTab
-            onPress={handleLogout}
-            to={"/"}
-            style={styles.text}
-            text={"Sign out"}
-          />
+          <>
+            <AppBarTab
+              to={"/review"}
+              style={styles.text}
+              text={"Send Review"}
+            />
+            <AppBarTab
+              onPress={handleLogout}
+              to={"/"}
+              style={styles.text}
+              text={"Sign out"}
+            />
+          </>
         ) : (
           <AppBarTab to={"/sign_in"} style={styles.text} text={"Sign in"} />
         )}
