@@ -3,8 +3,7 @@ import { Formik } from "formik";
 import FormikTextInput from "../FormikCommon/FormikTextInput";
 import * as yup from "yup";
 import theme from "../theme";
-import useSignIn from "../../hooks/useSignIn";
-import authStorage from "../../utils/authStorage";
+import useReview from "../../hooks/useReview";
 
 const styles = StyleSheet.create({
   field: {
@@ -29,16 +28,16 @@ const styles = StyleSheet.create({
 
 const initialValues = {
   ownerName: "",
-  repoName: "",
+  repositoryName: "",
   rating: 0,
-  review: "",
+  text: "",
 };
 
 const validationSchema = yup.object().shape({
   ownerName: yup.string().required("Owner name is required"),
-  repoName: yup.string().required("Repository name is required"),
+  repositoryName: yup.string().required("Repository name is required"),
   rating: yup.number().min(0).max(100).required("Rating is required"),
-  review: yup.string().required("Review is required"),
+  text: yup.string().required("Review is required"),
 });
 const ReviewForm = ({ onSubmit }) => {
   return (
@@ -50,9 +49,9 @@ const ReviewForm = ({ onSubmit }) => {
         style={styles.field}
       />
       <FormikTextInput
-        name={"repoName"}
+        name={"repositoryName"}
         placeholder="Repository name"
-        testId="repoName"
+        testId="repositoryName"
         style={styles.field}
       />
       <FormikTextInput
@@ -63,9 +62,9 @@ const ReviewForm = ({ onSubmit }) => {
         keyboardType="numeric"
       />
       <FormikTextInput
-        name={"review"}
+        name={"text"}
         placeholder="Review"
-        testId="review"
+        testId="text"
         style={styles.field}
         multiline
         numberOfLines={3}
@@ -80,14 +79,18 @@ const ReviewForm = ({ onSubmit }) => {
 };
 
 const Review = () => {
+  const [createReview] = useReview();
+
   const onSubmit = async (values) => {
-    const { username, password } = values;
+    const { repositoryName, ownerName, rating, text } = values;
+    console.log(values);
     try {
-      // const { authenticate } = await signIn({ username, password });
-      //
-      // const storage = new authStorage();
-      // await storage.setAccessToken(authenticate.accessToken);
-      console.log(values);
+      const { data } = await createReview({
+        repositoryName,
+        ownerName,
+        rating,
+        text,
+      });
     } catch (e) {
       console.log(e);
     }
