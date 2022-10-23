@@ -65,8 +65,11 @@ const styles = StyleSheet.create({
   styles: {
     marginHorizontal: 10,
   },
+  separator: {
+    height: 10,
+  },
 });
-
+const ItemSeparator = () => <View style={styles.separator} />;
 const RepositoryInfo = ({ item }) => {
   if (!item) return <Text>No such item</Text>;
   return (
@@ -91,8 +94,6 @@ const RepositoryItem = ({ item, isSingle = false }) => {
       setReviews(data.repository.reviews.edges.map((e) => e.node)),
   });
   if (loading) return <Text>Loading...</Text>;
-
-  console.log(reviews);
 
   const handleLinkPressed = (url) => {
     Linking.openURL(url);
@@ -139,6 +140,7 @@ const RepositoryItem = ({ item, isSingle = false }) => {
             data={reviews}
             renderItem={({ item }) => <ReviewItem review={item} />}
             keyExtractor={({ id }) => id}
+            ItemSeparatorComponent={ItemSeparator}
             ListHeaderComponent={() => <RepositoryInfo repository={item} />}
           />
         </>
