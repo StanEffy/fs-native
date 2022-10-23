@@ -1,6 +1,6 @@
 import { Text, Pressable, View, StyleSheet } from "react-native";
 import { Formik } from "formik";
-import FormikTextInput from "./FormikTextInput";
+import FormikTextInput from "../FormikCommon/FormikTextInput";
 import * as yup from "yup";
 import theme from "../theme";
 import useSignIn from "../../hooks/useSignIn";
@@ -37,7 +37,7 @@ const initialValues = {
 const validationSchema = yup.object().shape({
   ownerName: yup.string().required("Owner name is required"),
   repoName: yup.string().required("Repository name is required"),
-  rating: yup.number().required("Rating is required").min(0).max(100),
+  rating: yup.number().min(0).max(100).required("Rating is required"),
   review: yup.string().required("Review is required"),
 });
 const ReviewForm = ({ onSubmit }) => {

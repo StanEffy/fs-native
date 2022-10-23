@@ -1,10 +1,10 @@
 import { Text, Pressable, View, StyleSheet } from "react-native";
 import { Formik } from "formik";
-import FormikTextInput from "./FormikTextInput";
 import * as yup from "yup";
 import theme from "../theme";
 import useSignIn from "../../hooks/useSignIn";
 import authStorage from "../../utils/authStorage";
+import FormikTextInput from "../FormikCommon/FormikTextInput";
 
 const styles = StyleSheet.create({
   field: {
@@ -54,7 +54,9 @@ const SignInForm = ({ onSubmit }) => {
       />
       <Pressable onPress={onSubmit} testID={"buttonSubmit"}>
         <View style={styles.button}>
-          <Text style={styles.text}>Sign in</Text>
+          <View>
+            <Text style={styles.text}>Sign in</Text>
+          </View>
         </View>
       </Pressable>
     </View>
