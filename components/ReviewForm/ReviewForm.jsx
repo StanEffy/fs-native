@@ -4,6 +4,7 @@ import FormikTextInput from "../FormikCommon/FormikTextInput";
 import * as yup from "yup";
 import theme from "../theme";
 import useReview from "../../hooks/useReview";
+import { useEffect, useState } from "react";
 
 const styles = StyleSheet.create({
   field: {
@@ -24,6 +25,12 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "bold",
   },
+  error: {
+    color: "red",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });
 
 const initialValues = {
@@ -39,7 +46,7 @@ const validationSchema = yup.object().shape({
   rating: yup.number().min(0).max(100).required("Rating is required"),
   text: yup.string().required("Review is required"),
 });
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ onSubmit, setError }) => {
   return (
     <View testID={"formTestId"}>
       <FormikTextInput
@@ -80,6 +87,20 @@ const ReviewForm = ({ onSubmit }) => {
 
 const Review = () => {
   const [createReview] = useReview();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeoutID);
+    };
+  }, [error]);
+  const handleError = (e) => {
+    setError(e);
+  };
 
   const onSubmit = async (values) => {
     const { repositoryName, ownerName, rating, text } = values;
@@ -89,23 +110,31 @@ const Review = () => {
         ownerName,
         rating,
         text,
+        handleError,
       });
     } catch (e) {
       console.log(e);
     }
   };
 
-  return <ReviewContainer onSubmit={onSubmit} />;
+  return <ReviewContainer onSubmit={onSubmit} error={error} />;
 };
-export const ReviewContainer = ({ onSubmit }) => {
+export const ReviewContainer = ({ onSubmit, error }) => {
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {({ handleSubmit }) => <ReviewForm onSubmit={handleSubmit} />}
-    </Formik>
+    <>
+      {error ? (
+        <View>
+          <Text style={styles.error}>{error}</Text>
+        </View>
+      ) : null}
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ handleSubmit }) => <ReviewForm onSubmit={handleSubmit} />}
+      </Formik>
+    </>
   );
 };
 
