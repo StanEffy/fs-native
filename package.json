@@ -27,6 +27,7 @@
     "@expo/metro-config": "^0.4.0",
     "@expo/webpack-config": "^0.17.0",
     "@react-native-async-storage/async-storage": "~1.17.3",
+    "@react-native-picker/picker": "2.4.2",
     "apollo-link-context": "^1.0.20",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
@@ -40,6 +41,8 @@
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
     "react-native-dotenv": "^3.3.1",
+    "react-native-paper": "^5.0.0-rc.8",
+    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7",
     "react-router-native": "^6.4.2",
     "yup": "^0.32.11"

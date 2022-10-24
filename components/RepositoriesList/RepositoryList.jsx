@@ -2,6 +2,7 @@ import { FlatList, View, StyleSheet, Pressable } from "react-native";
 import RepositoryItem from "./RepositoryItem";
 
 import { useNavigate } from "react-router-native";
+import Filter from "../Filter/Filter";
 
 const styles = StyleSheet.create({
   separator: {
@@ -11,18 +12,17 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = ({ repositories }) => {
+const RepositoryList = ({ repositories, handleFilter }) => {
   const navigate = useNavigate();
 
   // Get the nodes from the edges array
   const repositoryNodes = repositories
-    ? repositories?.edges
-        ?.map((edge) => edge.node)
-        .sort((a, b) => b.forksCount - a.forksCount)
+    ? repositories?.edges?.map((edge) => edge.node)
     : [];
 
   return (
     <>
+      <Filter handleFilter={handleFilter} />
       <FlatList
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}

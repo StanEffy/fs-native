@@ -8,6 +8,7 @@ import useRepositories from "../hooks/useRepos";
 import RepositoryItem from "./RepositoriesList/RepositoryItem";
 import Review from "./ReviewForm/ReviewForm";
 import SignUp from "./SignUp/SignUp";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,14 +19,24 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-  const { repositories } = useRepositories();
+  const [filter, setFilter] = useState("CREATED_AT-ASC");
+  const [orderBy, orderDirection] = filter.split("-");
+  const { repositories } = useRepositories({ orderBy, orderDirection });
+
+  const handleFilter = (f) => setFilter(f);
+
   return (
     <View style={styles.container}>
       <AppBar />
       <Routes>
         <Route
           path="/"
-          element={<RepositoryList repositories={repositories} />}
+          element={
+            <RepositoryList
+              handleFilter={handleFilter}
+              repositories={repositories}
+            />
+          }
           exact
         />
         <Route path="/sign_in" element={<SignIn />} exact />
