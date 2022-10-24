@@ -21,7 +21,7 @@ const useReview = () => {
       },
     });
     if (data) {
-      navigate("/");
+      navigate(`/${data.createReview.repositoryId}`);
     }
 
     return data;
