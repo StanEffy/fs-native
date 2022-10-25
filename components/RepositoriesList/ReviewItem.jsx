@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../theme";
 import { format, parseISO } from "date-fns";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
 });
 
 const ReviewItem = ({ review }) => {
+  const navigate = useNavigate();
   return (
     <View style={styles.mainContainer}>
       <View style={styles.reviewRating}>
@@ -42,6 +44,17 @@ const ReviewItem = ({ review }) => {
         <Text style={styles.name}>{review.user.username}</Text>
         <Text>{format(parseISO(review.createdAt), "PPpp")}</Text>
         <Text>{review.text}</Text>
+      </View>
+      <View>
+        <Pressable
+          style={{ backgroundColor: "blue" }}
+          onPress={() => navigate(`/${review.id}`)}
+        >
+          <Text>View repo</Text>
+        </Pressable>
+        <Pressable style={{ backgroundColor: "red" }}>
+          <Text>Delete repo</Text>
+        </Pressable>
       </View>
     </View>
   );

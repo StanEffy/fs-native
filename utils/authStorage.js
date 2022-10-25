@@ -7,6 +7,7 @@ class AuthStorage {
 
   async getAccessToken() {
     const token = await AsyncStorage.getItem(`${this.namespace}:token`);
+    console.log("CHECK THE TOKEN " + token);
     return token ? JSON.parse(token) : "no token saved";
   }
 

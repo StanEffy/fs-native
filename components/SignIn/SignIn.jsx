@@ -5,6 +5,7 @@ import theme from "../theme";
 import useSignIn from "../../hooks/useSignIn";
 import authStorage from "../../utils/authStorage";
 import FormikTextInput from "../FormikCommon/FormikTextInput";
+import useAuthStorage from "../../hooks/useAuthStorage";
 
 const styles = StyleSheet.create({
   field: {
@@ -71,7 +72,8 @@ const SignIn = () => {
     try {
       const { authenticate } = await signIn({ username, password });
 
-      const storage = new authStorage();
+      const storage = useAuthStorage();
+      console.log("TOKEN FROM SIGN IN IS " + authenticate.accessToken);
       await storage.setAccessToken(authenticate.accessToken);
     } catch (e) {
       console.log(e);

@@ -10,6 +10,7 @@ import Review from "./ReviewForm/ReviewForm";
 import SignUp from "./SignUp/SignUp";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
+import UserReviews from "./UserReviews/UserReviews";
 
 const styles = StyleSheet.create({
   container: {
@@ -51,6 +52,7 @@ const Main = () => {
         />
         <Route path="/sign_in" element={<SignIn />} exact />
         <Route path="/sign_up" element={<SignUp />} exact />
+        <Route path="/my_reviews" element={<UserReviews />} exact />
         <Route path="/review" element={<Review />} exact />
         <Route path="/:id" element={<RepositoryItem isSingle={true} />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
