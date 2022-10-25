@@ -24,7 +24,8 @@ const Main = () => {
   const [orderBy, orderDirection] = filter.split("-");
   const [keyword, setKeyword] = useState("");
   const [searchKeyword] = useDebounce(keyword, 500);
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
+    first: 5,
     orderBy,
     orderDirection,
     searchKeyword,
@@ -43,6 +44,7 @@ const Main = () => {
               handleFilter={handleFilter}
               handleKeyword={setKeyword}
               repositories={repositories}
+              onEndReach={fetchMore}
             />
           }
           exact

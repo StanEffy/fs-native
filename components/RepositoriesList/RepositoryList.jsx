@@ -12,7 +12,12 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = ({ repositories, handleFilter, handleKeyword }) => {
+const RepositoryList = ({
+  repositories,
+  handleFilter,
+  handleKeyword,
+  onEndReach,
+}) => {
   const navigate = useNavigate();
 
   // Get the nodes from the edges array
@@ -25,6 +30,8 @@ const RepositoryList = ({ repositories, handleFilter, handleKeyword }) => {
       <Filter handleFilter={handleFilter} handleKeyword={handleKeyword} />
       <FlatList
         data={repositoryNodes}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => (
           <Pressable key={item.id} onPress={() => navigate(`/${item.id}`)}>
