@@ -83,22 +83,11 @@ const SignUp = () => {
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
-      const data = await signUp({ username, password });
-      const res = await signIn({ username, password });
+      await signUp({ username, password });
+      await signIn({ username, password });
     } catch (e) {
       console.log(e);
     }
-
-    // const [signIn] = useSignIn();
-    // const { username, password } = values;
-    // try {
-    //   const { authenticate } = await signIn({ username, password });
-    //
-    //   const storage = new authStorage();
-    //   await storage.setAccessToken(authenticate.accessToken);
-    // } catch (e) {
-    //   console.log(e);
-    // }
   };
 
   return <SignUpContainer onSubmit={onSubmit} />;

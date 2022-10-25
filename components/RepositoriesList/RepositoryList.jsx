@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = ({ repositories, handleFilter }) => {
+const RepositoryList = ({ repositories, handleFilter, handleKeyword }) => {
   const navigate = useNavigate();
 
   // Get the nodes from the edges array
@@ -22,7 +22,7 @@ const RepositoryList = ({ repositories, handleFilter }) => {
 
   return (
     <>
-      <Filter handleFilter={handleFilter} />
+      <Filter handleFilter={handleFilter} handleKeyword={handleKeyword} />
       <FlatList
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}

@@ -9,6 +9,7 @@ import RepositoryItem from "./RepositoriesList/RepositoryItem";
 import Review from "./ReviewForm/ReviewForm";
 import SignUp from "./SignUp/SignUp";
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +22,13 @@ const styles = StyleSheet.create({
 const Main = () => {
   const [filter, setFilter] = useState("CREATED_AT-ASC");
   const [orderBy, orderDirection] = filter.split("-");
-  const { repositories } = useRepositories({ orderBy, orderDirection });
+  const [keyword, setKeyword] = useState("");
+  const [searchKeyword] = useDebounce(keyword, 500);
+  const { repositories } = useRepositories({
+    orderBy,
+    orderDirection,
+    searchKeyword,
+  });
 
   const handleFilter = (f) => setFilter(f);
 
@@ -34,6 +41,7 @@ const Main = () => {
           element={
             <RepositoryList
               handleFilter={handleFilter}
+              handleKeyword={setKeyword}
               repositories={repositories}
             />
           }
