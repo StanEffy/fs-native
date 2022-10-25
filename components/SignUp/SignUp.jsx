@@ -5,6 +5,9 @@ import theme from "../theme";
 import useSignIn from "../../hooks/useSignIn";
 import authStorage from "../../utils/authStorage";
 import FormikTextInput from "../FormikCommon/FormikTextInput";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "../../graphql/mutations";
+import useSignUp from "../../hooks/useSignUp";
 
 const styles = StyleSheet.create({
   field: {
@@ -40,7 +43,7 @@ const validationSchema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Does not match with the password!")
     .required("Required"),
 });
-const SignInForm = ({ onSubmit }) => {
+const SignUpForm = ({ onSubmit }) => {
   return (
     <View testID={"formTestId"}>
       <FormikTextInput
@@ -74,33 +77,42 @@ const SignInForm = ({ onSubmit }) => {
   );
 };
 
-const SignIn = () => {
+const SignUp = () => {
+  const [signUp] = useSignUp();
   const [signIn] = useSignIn();
-
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
-      const { authenticate } = await signIn({ username, password });
-
-      const storage = new authStorage();
-      await storage.setAccessToken(authenticate.accessToken);
+      const data = await signUp({ username, password });
+      const res = await signIn({ username, password });
     } catch (e) {
       console.log(e);
     }
+
+    // const [signIn] = useSignIn();
+    // const { username, password } = values;
+    // try {
+    //   const { authenticate } = await signIn({ username, password });
+    //
+    //   const storage = new authStorage();
+    //   await storage.setAccessToken(authenticate.accessToken);
+    // } catch (e) {
+    //   console.log(e);
+    // }
   };
 
-  return <SignInContainer onSubmit={onSubmit} />;
+  return <SignUpContainer onSubmit={onSubmit} />;
 };
-export const SignInContainer = ({ onSubmit }) => {
+export const SignUpContainer = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+      {({ handleSubmit }) => <SignUpForm onSubmit={handleSubmit} />}
     </Formik>
   );
 };
 
-export default SignIn;
+export default SignUp;
