@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import ReviewItem from "../RepositoriesList/ReviewItem";
 import { useQuery } from "@apollo/client";
 import { GET_LOGIN } from "../../graphql/queries";
-import AuthStorageContext from "../../contexts/AuthStorageContext";
+
 import useAuthStorage from "../../hooks/useAuthStorage";
 
 const styles = StyleSheet.create({
@@ -26,25 +26,24 @@ const UserReviews = () => {
       fetchPolicy: "cache-and-network",
       variables: { includeReviews: true },
     });
-
+    console.log(data);
     if (data) {
-      data.authorizedUser !== null
-        ? (authorizedUser = data.authorizedUser)
-        : (authorizedUser = null);
+      data.me !== null ? (authorizedUser = data.me) : (authorizedUser = null);
     }
   }
 
   const reviews = authorizedUser
     ? authorizedUser.reviews.edges.map((edge) => edge.node)
     : [];
+
   console.log(reviews);
+
   if (!authorizedUser) return <Text>Loading</Text>;
 
   return (
     <>
-      <Text>Template text for nothing</Text>
       <FlatList
-        data={[]}
+        data={reviews}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <ReviewItem review={item} />}
       />

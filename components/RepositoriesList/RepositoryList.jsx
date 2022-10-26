@@ -24,7 +24,7 @@ const RepositoryList = ({
   const repositoryNodes = repositories
     ? repositories?.edges?.map((edge) => edge.node)
     : [];
-
+  console.log(repositoryNodes?.map((r) => r.id));
   return (
     <>
       <Filter handleFilter={handleFilter} handleKeyword={handleKeyword} />

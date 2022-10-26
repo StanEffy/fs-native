@@ -68,8 +68,13 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+  magrin: {
+    marginVertical: 20,
+  },
+  button: { backgroundColor: "red" },
 });
 const ItemSeparator = () => <View style={styles.separator} />;
+
 const RepositoryInfo = ({ item }) => {
   if (!item) return <Text>No such item</Text>;
   return (
@@ -82,7 +87,8 @@ const RepositoryInfo = ({ item }) => {
 const RepositoryItem = ({ item, isSingle = false }) => {
   const { id } = useParams();
   const [singleItem, setSingleItem] = useState(null);
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
+
   const { loading } = useQuery(GET_REPO, {
     variables: { repositoryId: id },
     onCompleted: (data) => setSingleItem(data.repository),
@@ -93,6 +99,7 @@ const RepositoryItem = ({ item, isSingle = false }) => {
     onCompleted: (data) =>
       setReviews(data.repository.reviews.edges.map((e) => e.node)),
   });
+  console.log(reviews);
   if (loading) return <Text>Loading...</Text>;
 
   const handleLinkPressed = (url) => {
@@ -132,13 +139,16 @@ const RepositoryItem = ({ item, isSingle = false }) => {
           <View style={styles.magrin}>
             <Button
               title={"Open in GitHub"}
+              color={theme.colors.primary}
               onPress={() => handleLinkPressed(url)}
             />
           </View>
 
           <FlatList
             data={reviews}
-            renderItem={({ item }) => <ReviewItem review={item} />}
+            renderItem={({ item }) => (
+              <ReviewItem review={item} isSingle={isSingle} />
+            )}
             keyExtractor={({ id }) => id}
             ItemSeparatorComponent={ItemSeparator}
             ListHeaderComponent={() => <RepositoryInfo repository={item} />}
