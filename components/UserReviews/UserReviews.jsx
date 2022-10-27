@@ -36,8 +36,6 @@ const UserReviews = () => {
     ? authorizedUser.reviews.edges.map((edge) => edge.node)
     : [];
 
-  console.log(reviews);
-
   if (!authorizedUser) return <Text>Loading</Text>;
 
   return (
